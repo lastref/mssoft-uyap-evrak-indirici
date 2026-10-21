@@ -1,0 +1,22 @@
+{
+  "name": "mssoft-uyap-evrak-indirici",
+  "version": "1.0.0",
+  "description": "MSSOFT UYAP Evrak İndirici — Vatandaş Portal dava dosyasındaki tüm evrakları ve ekleri seçmeli listeden, PDF olarak, tekrarsız indiren Chrome/Brave uzantısı.",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "MSSoft",
+  "homepage": "https://github.com/lastref/mssoft-uyap-evrak-indirici",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lastref/mssoft-uyap-evrak-indirici.git"
+  },
+  "scripts": {
+    "check": "node --check content.js && node --check background.js && node -e \"JSON.parse(require('fs').readFileSync('manifest.json','utf8'))\"",
+    "test": "npm run check && node --test test/extension.test.js",
+    "package": "node scripts/package.js",
+    "fixture": "node test/fixture-server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
