@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "UYAP Evrak İndirici",
+  "version": "1.0.0",
+  "description": "UYAP Vatandaş Portalında açılan dava dosyasının tüm evraklarını tek seferde indirir. Daha önce indirilen evrakları atlar.",
+  "author": "MSSoft",
+  "homepage_url": "https://github.com/lastref/uyap-evrak-indirici",
+  "minimum_chrome_version": "110",
+  "permissions": ["downloads", "storage", "scripting"],
+  "host_permissions": ["https://vatandas.uyap.gov.tr/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://vatandas.uyap.gov.tr/main/jsp/vatandas/*"],
+      "js": ["content.js"],
+      "css": ["panel.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    },
+    "default_title": "UYAP Evrak İndirici - dava dosyasını açıp Evrak sekmesine gelin"
+  }
+}
