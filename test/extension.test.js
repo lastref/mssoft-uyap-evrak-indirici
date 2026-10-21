@@ -159,9 +159,17 @@ test("findExisting: tam bileşen eşleşmesi, benzer adlar eşleşmez", async ()
 // ---------- content: uzantı normalizasyonu (kaynak metninden) ----------
 
 test("content: normalizeExt haritası allowlist ile aynı", () => {
-  const m = contentSrc.match(/const map = (\{[^}]+\})/);
+  const m = contentSrc.match(/const map = \{([^}]+)\}/);
   assert.ok(m, "normalizeExt haritası bulunmalı");
-  const map = Function("return " + m[1])();
+  // Kaynak metni çalıştırılmaz; yalnızca `anahtar: "değer"` çiftleri sözcüksel olarak okunur.
+  const map = {};
+  for (const pair of m[1].split(",")) {
+    if (!pair.trim()) continue;
+    const kv = pair.match(/^\s*([a-z0-9]+)\s*:\s*"([a-z0-9]+)"\s*$/);
+    assert.ok(kv, `beklenmeyen harita girdisi: ${pair.trim()}`);
+    map[kv[1]] = kv[2];
+  }
+  assert.ok(Object.keys(map).length >= 8);
   const { SAFE_EXT } = loadBackground();
   for (const v of Object.values(map)) assert.ok(SAFE_EXT.has(v), `allowlist dışı: ${v}`);
   assert.equal(map.html, undefined);
