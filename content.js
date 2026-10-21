@@ -231,7 +231,7 @@
         const anaId = span.getAttribute("ana_evrak_id") || "";
         const ekNo = (label.match(/Ek\s*(\d+)/i) || [])[1];
         const suffix = ekNo ? `Ek${ekNo}` : sanitize(label);
-        const base = pm ? pm.base : `Evrak_${anaId}`;
+        const base = pm ? pm.base : `Evrak_${sanitize(anaId) || "0"}`;
         meta = { base: `${base}_${suffix}`, key: `ek|${anaId}|${label}` };
         const parentLabel = parentSpan ? parentSpan.textContent.replace(/\s+/g, " ").trim() : "";
         displayLabel = parentLabel ? `${parentLabel} — ${label}` : label;
@@ -445,15 +445,24 @@
       }
     }
 
+    // Uzantı yalnızca bilinen listeden seçilir; sunucudan gelen ad olduğu gibi kullanılmaz.
     let ext = null;
     const fm = disp.match(/filename\*?=(?:UTF-8'')?"?([^";]+)"?/i);
     if (fm) {
-      const name = decodeURIComponent(fm[1]).trim();
+      let name = "";
+      try { name = decodeURIComponent(fm[1]).trim(); } catch (_) { name = fm[1].trim(); }
       const em = name.match(/\.([A-Za-z0-9]{1,5})$/);
-      if (em && !/^html?$/i.test(em[1])) ext = em[1].toLowerCase();
+      if (em) ext = normalizeExt(em[1]);
     }
-    if (!ext && MIME_EXT[ctype.split(";")[0].trim()]) ext = MIME_EXT[ctype.split(";")[0].trim()];
+    if (!ext) ext = MIME_EXT[ctype.split(";")[0].trim()] || null;
     return { blob, isPdf, ext, url };
+  }
+
+  // Bilinen uzantılar dışında hiçbir şey kabul edilmez.
+  function normalizeExt(e) {
+    const x = String(e || "").toLowerCase();
+    const map = { pdf: "pdf", udf: "udf", tif: "tif", tiff: "tif", jpg: "jpg", jpeg: "jpg", png: "png", zip: "zip", doc: "doc", docx: "docx", xml: "xml", txt: "txt" };
+    return map[x] || null;
   }
 
   function buildViewUrl(evrakId, mime) {
@@ -467,11 +476,7 @@
   }
 
   function extFromMimeType(mime) {
-    const m = String(mime || "").toLowerCase();
-    if (!m) return "udf";
-    if (m === "tiff") return "tif";
-    if (m === "jpeg") return "jpg";
-    return m.replace(/[^a-z0-9]/g, "") || "udf";
+    return normalizeExt(mime) || "udf";
   }
 
   async function sha256(blob) {
