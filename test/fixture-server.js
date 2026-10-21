@@ -38,7 +38,12 @@ function tree(page) {
 
 const page = `<!doctype html><html><head><meta charset="utf-8"><title>Sahte UYAP</title>
 <link rel="stylesheet" href="/panel.css">
-<style>body{font-family:sans-serif;padding:20px} .modal{border:1px solid #ccc;padding:12px;width:600px}</style>
+<style>body{font-family:sans-serif;padding:20px} .modal{border:1px solid #ccc;padding:12px;width:600px}
+/* Gerçek sitedeki Bootstrap/Metronic gibi saldırgan kurallar: panel bunlara dayanmalı */
+button{color:#333;font-size:15px;text-transform:uppercase;letter-spacing:.1em;text-shadow:0 1px 0 #fff;box-shadow:inset 0 -2px 0 rgba(0,0,0,.3);font-family:Georgia,serif}
+label{font-weight:bold;color:#0a0;margin-bottom:10px;display:inline-block;font-size:18px}
+input[type=checkbox]{margin:10px}
+div,span{line-height:2.2}</style>
 </head><body>
 <h3>Sahte Vatandaş Portal</h3>
 <button id="open">Dosya Görüntüle</button>
