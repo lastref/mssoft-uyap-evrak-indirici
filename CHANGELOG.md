@@ -2,6 +2,11 @@
 
 Tüm önemli değişiklikler burada listelenir. Biçim [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/), sürümleme [SemVer](https://semver.org/lang/tr/).
 
+## [1.0.1] — 2026-10-21
+
+### Düzeltildi
+- "Seçilenleri İndir" düğmesinin metni koyu zemin üzerinde koyu kalıyordu; panelin genel renk kuralı düğme ve durum renklerini eziyordu. Tüm panel kuralları `#uyd-panel` altına alındı; düğme metni beyaz, "indirildi" yeşil, "hata" kırmızı. Sitenin kendi `button`/`label` stilleri artık panele sızmıyor.
+
 ## [1.0.0] — 2026-10-21
 
 İlk yayımlanan sürüm.
@@ -25,4 +30,5 @@ Tüm önemli değişiklikler burada listelenir. Biçim [Keep a Changelog](https:
 - İndirme geçmişi araması tam bileşen eşleşmesiyle yapılır; benzer adlar ve farklı kök klasörler eşleşmez.
 - Sunucu evrak yerine HTML döndürürse dosya diske yazılmaz.
 
+[1.0.1]: https://github.com/lastref/mssoft-uyap-evrak-indirici/releases/tag/v1.0.1
 [1.0.0]: https://github.com/lastref/mssoft-uyap-evrak-indirici/releases/tag/v1.0.0

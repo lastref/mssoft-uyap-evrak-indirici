@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "MSSoft UYAP Evrak İndirici",
   "short_name": "UYAP İndirici",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "UYAP Vatandaş Portalında açılan dava dosyasının tüm evraklarını ve eklerini seçmeli listeden, PDF olarak, tekrarsız indirir.",
   "author": "MSSoft",
   "homepage_url": "https://github.com/lastref/mssoft-uyap-evrak-indirici",

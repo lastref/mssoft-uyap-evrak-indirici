@@ -1,6 +1,6 @@
 {
   "name": "mssoft-uyap-evrak-indirici",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MSSOFT UYAP Evrak İndirici — Vatandaş Portal dava dosyasındaki tüm evrakları ve ekleri seçmeli listeden, PDF olarak, tekrarsız indiren Chrome/Brave uzantısı.",
   "private": true,
   "license": "Apache-2.0",
